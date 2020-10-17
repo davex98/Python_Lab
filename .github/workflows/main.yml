@@ -32,4 +32,4 @@ jobs:
         run: python3.6 -m unittest discover Classes/
 
       - name: Run Calculations Tests
-        run: python 3.6 -m unittest discover Calculations\&Algorithms/
+        run: python3.6 -m unittest discover Calculations\&Algorithms/
