@@ -3,8 +3,8 @@ from math import sqrt
 
 class Complex(object):
     def __init__(self, real, imag=0.0):
-        self.real = real
-        self.imag = imag
+        self.real = int(real)
+        self.imag = int(imag)
 
     def __add__(self, other):
         return Complex(self.real + other.real,
