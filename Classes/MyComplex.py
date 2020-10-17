@@ -15,20 +15,20 @@ class Complex(object):
                        self.imag - other.imag)
 
     def __mul__(self, other):
-        return Complex(self.real*other.real - self.imag*other.imag,
-                       self.imag*other.real + self.real*other.imag)
+        return Complex(self.real * other.real - self.imag * other.imag,
+                       self.imag * other.real + self.real * other.imag)
 
-    # def __div__(self, other):
-    #     sr, si, or, oi = self.real, self.imag, \
-    #                      other.real, other.imag # short forms
-    #     r = float(or**2 + oi**2)
-    #     return Complex((sr*or+si*oi)/r, (si*or-sr*oi)/r)
+    def __truediv__(self, other):
+        conj = other.conjugate()
+
+        den = other * conj
+        den = den.real
+
+        num = self * conj
+        return Complex(num.real / den, num.imag / den)
 
     def __abs__(self):
-        return sqrt(self.real**2 + self.imag**2)
-
-    def __neg__(self):   # defines -c (c is Complex)
-        return Complex(-self.real, -self.imag)
+        return sqrt(self.real ** 2 + self.imag ** 2)
 
     def __eq__(self, other):
         return self.real == other.real and self.imag == other.imag
@@ -37,11 +37,10 @@ class Complex(object):
         return not self.__eq__(other)
 
     def __str__(self):
-        return '(%g, %g)' % (self.real, self.imag)
+        return "{} + {}j".format(self.real, self.imag)
 
     def __repr__(self):
         return 'Complex' + str(self)
 
-    def __pow__(self, power):
-        raise NotImplementedError\
-              ('self**power is not yet impl. for Complex')
+    def conjugate(self):
+        return Complex(self.real, -self.imag)
